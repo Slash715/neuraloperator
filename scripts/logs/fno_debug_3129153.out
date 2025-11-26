@@ -1,0 +1,10 @@
+===== [DEBUG] Starting =====
+Hostname: a1124u28n01.mghpcc.ycrc.yale.edu
+Shell: /bin/bash
+>>> Loading miniconda
+>>> Activating environment
+>>> Python path:
+>>> Python version:
+>>> Import test:
+>>> Now running training script:
+===== [DEBUG] FINISHED =====

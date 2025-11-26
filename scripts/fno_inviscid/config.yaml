@@ -1,0 +1,47 @@
+# Physics-informed FNO (inviscid Burgers) — paper-style config
+
+# --------------------------------
+# Space–time grid
+# --------------------------------
+Nx: 256          # spatial points in [0,1]
+Nt: 101          # time steps in [0,T]
+T: 1.0           # final time, so dt ≈ 0.01
+
+# --------------------------------
+# Initial condition distribution (GRF)
+# --------------------------------
+ic_length_scale: 1.0   # same as your DeepONet GRF
+ic_sigma: 1.0          # optional amplitude (only if sampler uses it)
+
+# --------------------------------
+# FNO architecture
+# --------------------------------
+width: 64              # channel width; 64 is very typical for FNO Burgers
+layers: 4              # Fourier layers (as in many FNO/PINO setups)
+n_modes_x: 32          # Fourier modes in space
+n_modes_t: 16          # Fourier modes in time
+in_channels: 3         # [v(x), x, t] – what you're already using
+out_channels: 1        # scalar u(t,x)
+
+# --------------------------------
+# Training
+# --------------------------------
+batch_size: 16
+iterations: 50000      # long run ~ "paper level"
+lr: 0.001              # standard choice for FNO/PINO
+weight_decay: 1.0e-4   # common regularization
+
+# Optional LR scheduler (use only if you wire it in)
+scheduler_step: 10000  # decay LR every 10k steps
+scheduler_gamma: 0.5   # multiply LR by 0.5 each step
+
+# --------------------------------
+# Loss weights
+# --------------------------------
+w_pde: 1.0             # weight for PDE residual loss
+w_ic: 10.0             # weight for initial condition loss
+
+print_every: 100
+val_every: 500
+
+
