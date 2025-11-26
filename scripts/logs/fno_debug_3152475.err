@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/jw3275/neuraloperator/scripts/fno_inviscid/train_fno_inviscid.py", line 149, in <module>
+    main(cfg)
+  File "/home/jw3275/neuraloperator/scripts/fno_inviscid/train_fno_inviscid.py", line 84, in main
+    opt = torch.optim.Adam(model.parameters(), lr=config["lr"])
+  File "/home/jw3275/.conda/envs/fno/lib/python3.10/site-packages/torch/optim/adam.py", line 58, in __init__
+    if not 0.0 <= lr:
+TypeError: '<=' not supported between instances of 'float' and 'str'

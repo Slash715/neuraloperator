@@ -1,0 +1,4 @@
+  File "/home/jw3275/neuraloperator/scripts/fno_inviscid/train_fno_inviscid.py", line 71
+    r = burgers_residual_fd(u_pred, T, Lx)
+    ^
+IndentationError: expected an indented block after function definition on line 70

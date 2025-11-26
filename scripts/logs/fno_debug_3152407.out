@@ -1,0 +1,317 @@
+===== [DEBUG] Starting =====
+Hostname: a1126u11n01.mghpcc.ycrc.yale.edu
+Shell: /bin/bash
+>>> Loading miniconda
+>>> Activating environment
+>>> Python path:
+/home/jw3275/.conda/envs/fno/bin/python
+>>> Python version:
+Python 3.10.19
+>>> Import test:
+Torch OK: 2.9.1+cu128
+YAML OK: 6.0.3
+NeuralOp OK
+>>> Now running training script:
+Running on: cuda
+[step 1] sampled v
+[step 1] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 1] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 1] IC target built
+[step 1] L_ic=9.8452e-01
+[step 1] optimizer step done
+[step 2] sampled v
+[step 2] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 2] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 2] IC target built
+[step 2] L_ic=9.0035e-01
+[step 2] optimizer step done
+[step 3] sampled v
+[step 3] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 3] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 3] IC target built
+[step 3] L_ic=7.3501e-01
+[step 3] optimizer step done
+[step 4] sampled v
+[step 4] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 4] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 4] IC target built
+[step 4] L_ic=3.7472e-01
+[step 4] optimizer step done
+[step 5] sampled v
+[step 5] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 5] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 5] IC target built
+[step 5] L_ic=5.8178e-02
+[step 5] optimizer step done
+[step 6] sampled v
+[step 6] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 6] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 6] IC target built
+[step 6] L_ic=7.3690e-02
+[step 6] optimizer step done
+[step 7] sampled v
+[step 7] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 7] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 7] IC target built
+[step 7] L_ic=2.6736e-02
+[step 7] optimizer step done
+[step 8] sampled v
+[step 8] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 8] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 8] IC target built
+[step 8] L_ic=6.3751e-02
+[step 8] optimizer step done
+[step 9] sampled v
+[step 9] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 9] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 9] IC target built
+[step 9] L_ic=4.5179e-02
+[step 9] optimizer step done
+[step 10] sampled v
+[step 10] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 10] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 10] IC target built
+[step 10] L_ic=1.1295e-02
+[step 10] optimizer step done
+[step 11] sampled v
+[step 11] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 11] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 11] IC target built
+[step 11] L_ic=1.9497e-02
+[step 11] optimizer step done
+[step 12] sampled v
+[step 12] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 12] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 12] IC target built
+[step 12] L_ic=3.7954e-02
+[step 12] optimizer step done
+[step 13] sampled v
+[step 13] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 13] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 13] IC target built
+[step 13] L_ic=1.2444e-02
+[step 13] optimizer step done
+[step 14] sampled v
+[step 14] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 14] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 14] IC target built
+[step 14] L_ic=9.8602e-03
+[step 14] optimizer step done
+[step 15] sampled v
+[step 15] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 15] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 15] IC target built
+[step 15] L_ic=1.7326e-02
+[step 15] optimizer step done
+[step 16] sampled v
+[step 16] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 16] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 16] IC target built
+[step 16] L_ic=1.5535e-02
+[step 16] optimizer step done
+[step 17] sampled v
+[step 17] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 17] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 17] IC target built
+[step 17] L_ic=5.8200e-03
+[step 17] optimizer step done
+[step 18] sampled v
+[step 18] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 18] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 18] IC target built
+[step 18] L_ic=3.9030e-03
+[step 18] optimizer step done
+[step 19] sampled v
+[step 19] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 19] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 19] IC target built
+[step 19] L_ic=1.1585e-02
+[step 19] optimizer step done
+[step 20] sampled v
+[step 20] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 20] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 20] IC target built
+[step 20] L_ic=1.3824e-02
+[step 20] optimizer step done
+[step 21] sampled v
+[step 21] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 21] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 21] IC target built
+[step 21] L_ic=3.2731e-03
+[step 21] optimizer step done
+[step 22] sampled v
+[step 22] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 22] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 22] IC target built
+[step 22] L_ic=4.9206e-03
+[step 22] optimizer step done
+[step 23] sampled v
+[step 23] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 23] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 23] IC target built
+[step 23] L_ic=9.6996e-03
+[step 23] optimizer step done
+[step 24] sampled v
+[step 24] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 24] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 24] IC target built
+[step 24] L_ic=9.0777e-03
+[step 24] optimizer step done
+[step 25] sampled v
+[step 25] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 25] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 25] IC target built
+[step 25] L_ic=3.5996e-03
+[step 25] optimizer step done
+[step 26] sampled v
+[step 26] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 26] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 26] IC target built
+[step 26] L_ic=1.9695e-03
+[step 26] optimizer step done
+[step 27] sampled v
+[step 27] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 27] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 27] IC target built
+[step 27] L_ic=4.5432e-03
+[step 27] optimizer step done
+[step 28] sampled v
+[step 28] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 28] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 28] IC target built
+[step 28] L_ic=5.3181e-03
+[step 28] optimizer step done
+[step 29] sampled v
+[step 29] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 29] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 29] IC target built
+[step 29] L_ic=1.7990e-03
+[step 29] optimizer step done
+[step 30] sampled v
+[step 30] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 30] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 30] IC target built
+[step 30] L_ic=7.2058e-04
+[step 30] optimizer step done
+[step 31] sampled v
+[step 31] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 31] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 31] IC target built
+[step 31] L_ic=2.3804e-03
+[step 31] optimizer step done
+[step 32] sampled v
+[step 32] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 32] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 32] IC target built
+[step 32] L_ic=4.5944e-03
+[step 32] optimizer step done
+[step 33] sampled v
+[step 33] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 33] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 33] IC target built
+[step 33] L_ic=2.8741e-03
+[step 33] optimizer step done
+[step 34] sampled v
+[step 34] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 34] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 34] IC target built
+[step 34] L_ic=8.7606e-04
+[step 34] optimizer step done
+[step 35] sampled v
+[step 35] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 35] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 35] IC target built
+[step 35] L_ic=1.5000e-03
+[step 35] optimizer step done
+[step 36] sampled v
+[step 36] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 36] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 36] IC target built
+[step 36] L_ic=3.3494e-03
+[step 36] optimizer step done
+[step 37] sampled v
+[step 37] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 37] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 37] IC target built
+[step 37] L_ic=2.3594e-03
+[step 37] optimizer step done
+[step 38] sampled v
+[step 38] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 38] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 38] IC target built
+[step 38] L_ic=4.8306e-04
+[step 38] optimizer step done
+[step 39] sampled v
+[step 39] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 39] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 39] IC target built
+[step 39] L_ic=9.8037e-04
+[step 39] optimizer step done
+[step 40] sampled v
+[step 40] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 40] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 40] IC target built
+[step 40] L_ic=1.8364e-03
+[step 40] optimizer step done
+[step 41] sampled v
+[step 41] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 41] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 41] IC target built
+[step 41] L_ic=1.4926e-03
+[step 41] optimizer step done
+[step 42] sampled v
+[step 42] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 42] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 42] IC target built
+[step 42] L_ic=8.6780e-04
+[step 42] optimizer step done
+[step 43] sampled v
+[step 43] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 43] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 43] IC target built
+[step 43] L_ic=7.1782e-04
+[step 43] optimizer step done
+[step 44] sampled v
+[step 44] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 44] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 44] IC target built
+[step 44] L_ic=1.2848e-03
+[step 44] optimizer step done
+[step 45] sampled v
+[step 45] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 45] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 45] IC target built
+[step 45] L_ic=7.8147e-04
+[step 45] optimizer step done
+[step 46] sampled v
+[step 46] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 46] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 46] IC target built
+[step 46] L_ic=4.7867e-04
+[step 46] optimizer step done
+[step 47] sampled v
+[step 47] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 47] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 47] IC target built
+[step 47] L_ic=2.3291e-04
+[step 47] optimizer step done
+[step 48] sampled v
+[step 48] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 48] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 48] IC target built
+[step 48] L_ic=5.7328e-04
+[step 48] optimizer step done
+[step 49] sampled v
+[step 49] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 49] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 49] IC target built
+[step 49] L_ic=8.1082e-04
+[step 49] optimizer step done
+[step 50] sampled v
+[step 50] built inp, shape=torch.Size([8, 3, 64, 64])
+[step 50] forward done, u_pred.shape=torch.Size([8, 1, 64, 64])
+[step 50] IC target built
+[step 50] L_ic=7.3747e-04
+[step 50] optimizer step done
+Model saved → fno_inviscid_burgers.pt
+===== [DEBUG] FINISHED =====

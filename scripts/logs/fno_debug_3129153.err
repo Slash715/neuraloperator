@@ -1,0 +1,18 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"miniconda/24.1.2"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "miniconda/24.1.2"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+/var/spool/slurmd/job3129153/slurm_script: line 19: activate: No such file or directory
+/var/spool/slurmd/job3129153/slurm_script: line 19: conda: command not found
+/usr/bin/which: no python in (/opt/lenovo/onecli:/home/jw3275/.local/bin:/home/jw3275/bin:/apps/bin:/opt/slurm/current/bin:/opt/lenovo/onecli:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin)
+/var/spool/slurmd/job3129153/slurm_script: line 25: python: command not found
+/var/spool/slurmd/job3129153/slurm_script: line 28: python: command not found
+/var/spool/slurmd/job3129153/slurm_script: line 40: python: command not found
