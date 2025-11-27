@@ -9,6 +9,7 @@ dependencies = [
     "ruamel-yaml",
     "zencfg",
     "configmypy",
+    "torch",
     "tensorly",
     "tensorly-torch",
     "matplotlib",
