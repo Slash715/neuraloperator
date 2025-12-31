@@ -90,7 +90,7 @@ class Burgers1dTimeDataset(PTDataset):
         if not root_dir.exists():
             root_dir.mkdir(parents=True)
 
-        available_resolutions = [16, 128]
+        available_resolutions = [16, 100, 128]
         assert (
             train_resolution in available_resolutions
         ), f"Resolutions available: {available_resolutions}, got {train_resolution}"
@@ -155,8 +155,10 @@ def load_mini_burgers_1dtime(
         n_tests=[n_test],
         batch_size=batch_size,
         test_batch_sizes=[test_batch_size],
-        train_resolution=16,
-        test_resolutions=[16],
+        train_resolution=100,
+    #   train_resolution=16,
+        test_resolutions=[100],
+    #   test_resolutions=[16],
         temporal_subsample=temporal_subsample,
         spatial_subsample=spatial_subsample,
     )
@@ -166,8 +168,8 @@ def load_mini_burgers_1dtime(
     )
 
     test_loaders = {
-        16: DataLoader(
-            burgers_dataset.test_dbs[16], batch_size=test_batch_size, shuffle=False
+        100: DataLoader(
+            burgers_dataset.test_dbs[100], batch_size=test_batch_size, shuffle=False
         )
     }
 

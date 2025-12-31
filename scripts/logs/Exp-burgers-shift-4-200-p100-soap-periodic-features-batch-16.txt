@@ -1,0 +1,11 @@
+--- Starting Experiment ---
+Config: Depth=4, Width=200, P=100
+Domain: x[0.0,1.0], t[0.0,1.0]
+Compiling model...
+Compiling model...
+'compile' took 2.996955 s
+
+Training model...
+
+Step      Train loss              Test loss               Test metric
+0         [2.94e+00, 1.19e+01]    [3.34e+00, 2.48e+01]    []  

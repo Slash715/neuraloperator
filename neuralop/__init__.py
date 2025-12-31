@@ -8,6 +8,7 @@ from .losses import (
     LpLoss,
     H1Loss,
     BurgersEqnLoss,
+    HeatBurgersEqnLoss,
     ICLoss,
     WeightedSumLoss,
     Aggregator,

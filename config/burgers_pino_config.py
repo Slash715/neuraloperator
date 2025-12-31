@@ -2,7 +2,7 @@ from typing import Any, List, Optional
 
 from zencfg import ConfigBase
 from .distributed import DistributedConfig
-from .models import ModelConfig, FNO_Small2d
+from .models import ModelConfig, FNO_Large2d
 from .opt import OptimizationConfig, PatchingConfig
 from .wandb import WandbConfig
 
@@ -14,8 +14,10 @@ class BurgersDatasetConfig(ConfigBase):
     test_batch_sizes: List[int] = [16]
     n_tests: List[int] = [400]
     # full res is 128x101. We redistribute a mini version at 16x17
-    spatial_length: int = 16
-    temporal_length: int = 17
+    spatial_length: int = 100
+#   spatial_length: int = 16
+    temporal_length: int = 100
+#   temporal_length: int = 17
     temporal_subsample: Optional[int] = None
     encode_input: bool = False
     encode_output: bool = False
@@ -23,8 +25,10 @@ class BurgersDatasetConfig(ConfigBase):
 
 
 class BurgersOptConfig(OptimizationConfig):
+#   n_epochs: int = 50000
     n_epochs: int = 10000
-    training_loss: List[str] = ["equation", "ic", "l2"] # ["equation", "l2"... or "ic"...]
+#   training_loss: List[str] = ["equation", "ic", "l2"] # ["equation", "l2"... or "ic"...]
+    training_loss: List[str] = ["equation", "ic"] # ["equation", "l2"... or "ic"...]
     testing_loss: str = "l2"
     learning_rate: float = 1e-4
     weight_decay: float = 1e-4
@@ -42,7 +46,8 @@ class Default(ConfigBase):
     verbose: bool = True
     arch: str = "fno"
     distributed: DistributedConfig = DistributedConfig()
-    model: ModelConfig = FNO_Small2d()
+#   model: ModelConfig = FNO_Small2d()
+    model: ModelConfig = FNO_Large2d()
     opt: OptimizationConfig = BurgersOptConfig()
     data: BurgersDatasetConfig = BurgersDatasetConfig()
     patching: PatchingConfig = PatchingConfig()

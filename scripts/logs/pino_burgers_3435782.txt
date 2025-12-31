@@ -1,0 +1,644 @@
+===== Starting PINO Burgers Training =====
+Running on:
+Sun Dec  7 00:53:45 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.133.20             Driver Version: 570.133.20     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200                    On  |   00000000:DB:00.0 Off |                    0 |
+| N/A   33C    P0             81W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Current directory: /home/jw3275/neuraloperator/scripts
+##### CONFIG ######
+{'_config_name': 'default', 'n_params_baseline': None, 'verbose': True, 'arch': 'fno', 'distributed': {'use_distributed': False, 'model_parallel_size': 1, 'seed': None}, 'model': {'model_arch': 'fno', 'lifting_channel_ratio': 2, 'projection_channel_ratio': 2, 'n_layers': 4, 'domain_padding': 0.0, 'norm': None, 'fno_skip': 'linear', 'implementation': 'factorized', 'use_channel_mlp': True, 'channel_mlp_expansion': 0.5, 'channel_mlp_dropout': 0, 'separable': False, 'factorization': None, 'rank': 1.0, 'fixed_rank_modes': False, 'stabilizer': None, 'data_channels': 1, 'out_channels': 1, 'n_modes': [64, 64], 'hidden_channels': 128}, 'opt': {'training_loss': ['equation', 'ic'], 'testing_loss': 'l2', 'learning_rate': 0.0001, 'weight_decay': 0.0001, 'eval_interval': 1, 'mixed_precision': False, 'scheduler': 'ReduceLROnPlateau', 'scheduler_T_max': 500, 'scheduler_patience': 100, 'step_size': 60, 'gamma': 0.5, 'n_epochs': 50, 'loss_aggregator': 'relobralo'}, 'data': {'folder': 'neuralop/data/datasets/data/', 'batch_size': 16, 'n_train': 800, 'test_batch_sizes': [16], 'n_tests': [400], 'spatial_length': 16, 'temporal_length': 17, 'temporal_subsample': None, 'encode_input': False, 'encode_output': False, 'include_endpoint': [True, False]}, 'patching': {'levels': 0, 'padding': 0, 'stitching': False}, 'wandb': {'log': False, 'entity': None, 'project': None, 'name': None, 'group': None, 'sweep': False, 'log_output': True}}
+Loading test db for resolution 16 with 400 samples 
+
+### MODEL ###
+ FNO(
+  (positional_embedding): GridEmbeddingND()
+  (fno_blocks): FNOBlocks(
+    (convs): ModuleList(
+      (0-3): 4 x SpectralConv(
+        (weight): DenseTensor(shape=torch.Size([128, 128, 64, 33]), rank=None)
+      )
+    )
+    (fno_skips): ModuleList(
+      (0-3): 4 x Flattened1dConv(
+        (conv): Conv1d(128, 128, kernel_size=(1,), stride=(1,), bias=False)
+      )
+    )
+    (channel_mlp): ModuleList(
+      (0-3): 4 x ChannelMLP(
+        (fcs): ModuleList(
+          (0): Conv1d(128, 64, kernel_size=(1,), stride=(1,))
+          (1): Conv1d(64, 128, kernel_size=(1,), stride=(1,))
+        )
+      )
+    )
+    (channel_mlp_skips): ModuleList(
+      (0-3): 4 x SoftGating()
+    )
+  )
+  (lifting): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(3, 256, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(256, 128, kernel_size=(1,), stride=(1,))
+    )
+  )
+  (projection): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(128, 256, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(256, 1, kernel_size=(1,), stride=(1,))
+    )
+  )
+)
+
+### OPTIMIZER ###
+ AdamW (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    correct_bias: True
+    eps: 1e-06
+    lr: 0.0001
+    weight_decay: 0.0001
+)
+
+### SCHEDULER ###
+ <torch.optim.lr_scheduler.ReduceLROnPlateau object at 0x14b6c2ded990>
+
+### LOSSES ###
+
+ * Train: Relobralo()
+
+ * Test: {'h1': <neuralop.losses.data_losses.H1Loss object at 0x14b6c2dee2c0>, 'l2': <neuralop.losses.data_losses.LpLoss object at 0x14b6c2dee050>}
+
+### Beginning Training...
+
+
+n_params: 277024129
+
+Epoch 1/50
+Average Training Loss: 1.3859
+Individual Training Losses:
+  EQUATION Loss: 0.0536
+  IC Loss: 1.3323
+Loss Weights:
+  EQUATION Weight: 1.0000
+  IC Weight: 1.0000
+
+Test 16 loss: 13.2037
+
+Epoch 2/50
+Average Training Loss: 0.9363
+Individual Training Losses:
+  EQUATION Loss: 0.0892
+  IC Loss: 0.9859
+Loss Weights:
+  EQUATION Weight: 1.1052
+  IC Weight: 0.8948
+
+Test 16 loss: 12.0753
+
+Epoch 3/50
+Average Training Loss: 0.7854
+Individual Training Losses:
+  EQUATION Loss: 0.1690
+  IC Loss: 0.6518
+Loss Weights:
+  EQUATION Weight: 1.0178
+  IC Weight: 0.9822
+
+Test 16 loss: 11.4140
+
+Epoch 4/50
+Average Training Loss: 0.7037
+Individual Training Losses:
+  EQUATION Loss: 0.2033
+  IC Loss: 0.5135
+Loss Weights:
+  EQUATION Weight: 0.9522
+  IC Weight: 1.0478
+
+Test 16 loss: 11.0597
+
+Epoch 5/50
+Average Training Loss: 0.6625
+Individual Training Losses:
+  EQUATION Loss: 0.2136
+  IC Loss: 0.4545
+Loss Weights:
+  EQUATION Weight: 1.0702
+  IC Weight: 0.9298
+
+Test 16 loss: 10.6953
+
+Epoch 6/50
+Average Training Loss: 0.6427
+Individual Training Losses:
+  EQUATION Loss: 0.2112
+  IC Loss: 0.4314
+Loss Weights:
+  EQUATION Weight: 0.9903
+  IC Weight: 1.0097
+
+Test 16 loss: 11.0949
+
+Epoch 7/50
+Average Training Loss: 0.6242
+Individual Training Losses:
+  EQUATION Loss: 0.2007
+  IC Loss: 0.4284
+Loss Weights:
+  EQUATION Weight: 0.9648
+  IC Weight: 1.0352
+
+Test 16 loss: 10.5064
+
+Epoch 8/50
+Average Training Loss: 0.6141
+Individual Training Losses:
+  EQUATION Loss: 0.1879
+  IC Loss: 0.4324
+Loss Weights:
+  EQUATION Weight: 0.8939
+  IC Weight: 1.1061
+
+Test 16 loss: 10.6969
+
+Epoch 9/50
+Average Training Loss: 0.5887
+Individual Training Losses:
+  EQUATION Loss: 0.1727
+  IC Loss: 0.4341
+Loss Weights:
+  EQUATION Weight: 0.9882
+  IC Weight: 1.0118
+
+Test 16 loss: 10.2419
+
+Epoch 10/50
+Average Training Loss: 0.5903
+Individual Training Losses:
+  EQUATION Loss: 0.2011
+  IC Loss: 0.3882
+Loss Weights:
+  EQUATION Weight: 0.9600
+  IC Weight: 1.0400
+
+Test 16 loss: 10.2624
+
+Epoch 11/50
+Average Training Loss: 0.5687
+Individual Training Losses:
+  EQUATION Loss: 0.1735
+  IC Loss: 0.4098
+Loss Weights:
+  EQUATION Weight: 1.0096
+  IC Weight: 0.9904
+
+Test 16 loss: 9.8797
+
+Epoch 12/50
+Average Training Loss: 0.5699
+Individual Training Losses:
+  EQUATION Loss: 0.1958
+  IC Loss: 0.3755
+Loss Weights:
+  EQUATION Weight: 0.9852
+  IC Weight: 1.0148
+
+Test 16 loss: 10.2679
+
+Epoch 13/50
+Average Training Loss: 0.5543
+Individual Training Losses:
+  EQUATION Loss: 0.1790
+  IC Loss: 0.3822
+Loss Weights:
+  EQUATION Weight: 0.9227
+  IC Weight: 1.0773
+
+Test 16 loss: 10.3080
+
+Epoch 14/50
+Average Training Loss: 0.5293
+Individual Training Losses:
+  EQUATION Loss: 0.1533
+  IC Loss: 0.4039
+Loss Weights:
+  EQUATION Weight: 1.0336
+  IC Weight: 0.9664
+
+Test 16 loss: 9.9680
+
+Epoch 15/50
+Average Training Loss: 0.5461
+Individual Training Losses:
+  EQUATION Loss: 0.1783
+  IC Loss: 0.3771
+Loss Weights:
+  EQUATION Weight: 1.4599
+  IC Weight: 0.5401
+
+Test 16 loss: 10.1906
+
+Epoch 16/50
+Average Training Loss: 0.5214
+Individual Training Losses:
+  EQUATION Loss: 0.1498
+  IC Loss: 0.3976
+Loss Weights:
+  EQUATION Weight: 1.1378
+  IC Weight: 0.8622
+
+Test 16 loss: 10.2001
+
+Epoch 17/50
+Average Training Loss: 0.5236
+Individual Training Losses:
+  EQUATION Loss: 0.1733
+  IC Loss: 0.3572
+Loss Weights:
+  EQUATION Weight: 1.0794
+  IC Weight: 0.9206
+
+Test 16 loss: 10.0675
+
+Epoch 18/50
+Average Training Loss: 0.5150
+Individual Training Losses:
+  EQUATION Loss: 0.1564
+  IC Loss: 0.3742
+Loss Weights:
+  EQUATION Weight: 1.0766
+  IC Weight: 0.9234
+
+Test 16 loss: 10.2926
+
+Epoch 19/50
+Average Training Loss: 0.4998
+Individual Training Losses:
+  EQUATION Loss: 0.1436
+  IC Loss: 0.3784
+Loss Weights:
+  EQUATION Weight: 0.9708
+  IC Weight: 1.0292
+
+Test 16 loss: 9.9387
+
+Epoch 20/50
+Average Training Loss: 0.5035
+Individual Training Losses:
+  EQUATION Loss: 0.1460
+  IC Loss: 0.3792
+Loss Weights:
+  EQUATION Weight: 0.9764
+  IC Weight: 1.0236
+
+Test 16 loss: 10.0712
+
+Epoch 21/50
+Average Training Loss: 0.5099
+Individual Training Losses:
+  EQUATION Loss: 0.1668
+  IC Loss: 0.3458
+Loss Weights:
+  EQUATION Weight: 0.9995
+  IC Weight: 1.0005
+
+Test 16 loss: 9.9921
+
+Epoch 22/50
+Average Training Loss: 0.4908
+Individual Training Losses:
+  EQUATION Loss: 0.1510
+  IC Loss: 0.3531
+Loss Weights:
+  EQUATION Weight: 1.0034
+  IC Weight: 0.9966
+
+Test 16 loss: 10.0337
+
+Epoch 23/50
+Average Training Loss: 0.4867
+Individual Training Losses:
+  EQUATION Loss: 0.1564
+  IC Loss: 0.3411
+Loss Weights:
+  EQUATION Weight: 1.3555
+  IC Weight: 0.6445
+
+Test 16 loss: 10.4065
+
+Epoch 24/50
+Average Training Loss: 0.4880
+Individual Training Losses:
+  EQUATION Loss: 0.1401
+  IC Loss: 0.3633
+Loss Weights:
+  EQUATION Weight: 0.7990
+  IC Weight: 1.2010
+
+Test 16 loss: 10.0649
+
+Epoch 25/50
+Average Training Loss: 0.4786
+Individual Training Losses:
+  EQUATION Loss: 0.1477
+  IC Loss: 0.3473
+Loss Weights:
+  EQUATION Weight: 1.0005
+  IC Weight: 0.9995
+
+Test 16 loss: 10.1123
+
+Epoch 26/50
+Average Training Loss: 0.4804
+Individual Training Losses:
+  EQUATION Loss: 0.1546
+  IC Loss: 0.3302
+Loss Weights:
+  EQUATION Weight: 1.0131
+  IC Weight: 0.9869
+
+Test 16 loss: 10.0051
+
+Epoch 27/50
+Average Training Loss: 0.4782
+Individual Training Losses:
+  EQUATION Loss: 0.1507
+  IC Loss: 0.3326
+Loss Weights:
+  EQUATION Weight: 1.0103
+  IC Weight: 0.9897
+
+Test 16 loss: 10.0761
+
+Epoch 28/50
+Average Training Loss: 0.4648
+Individual Training Losses:
+  EQUATION Loss: 0.1354
+  IC Loss: 0.3487
+Loss Weights:
+  EQUATION Weight: 0.9340
+  IC Weight: 1.0660
+
+Test 16 loss: 10.1248
+
+Epoch 29/50
+Average Training Loss: 0.4674
+Individual Training Losses:
+  EQUATION Loss: 0.1436
+  IC Loss: 0.3287
+Loss Weights:
+  EQUATION Weight: 0.9573
+  IC Weight: 1.0427
+
+Test 16 loss: 10.2352
+
+Epoch 30/50
+Average Training Loss: 0.4603
+Individual Training Losses:
+  EQUATION Loss: 0.1422
+  IC Loss: 0.3285
+Loss Weights:
+  EQUATION Weight: 1.0030
+  IC Weight: 0.9970
+
+Test 16 loss: 10.1914
+
+Epoch 31/50
+Average Training Loss: 0.4564
+Individual Training Losses:
+  EQUATION Loss: 0.1433
+  IC Loss: 0.3169
+Loss Weights:
+  EQUATION Weight: 0.9325
+  IC Weight: 1.0675
+
+Test 16 loss: 9.9997
+
+Epoch 32/50
+Average Training Loss: 0.4537
+Individual Training Losses:
+  EQUATION Loss: 0.1359
+  IC Loss: 0.3297
+Loss Weights:
+  EQUATION Weight: 1.0026
+  IC Weight: 0.9974
+
+Test 16 loss: 10.1616
+
+Epoch 33/50
+Average Training Loss: 0.4445
+Individual Training Losses:
+  EQUATION Loss: 0.1324
+  IC Loss: 0.3264
+Loss Weights:
+  EQUATION Weight: 0.9701
+  IC Weight: 1.0299
+
+Test 16 loss: 10.3699
+
+Epoch 34/50
+Average Training Loss: 0.4482
+Individual Training Losses:
+  EQUATION Loss: 0.1361
+  IC Loss: 0.3219
+Loss Weights:
+  EQUATION Weight: 0.9909
+  IC Weight: 1.0091
+
+Test 16 loss: 10.1113
+
+Epoch 35/50
+Average Training Loss: 0.4437
+Individual Training Losses:
+  EQUATION Loss: 0.1366
+  IC Loss: 0.3114
+Loss Weights:
+  EQUATION Weight: 0.8440
+  IC Weight: 1.1560
+
+Test 16 loss: 9.9368
+
+Epoch 36/50
+Average Training Loss: 0.4455
+Individual Training Losses:
+  EQUATION Loss: 0.1436
+  IC Loss: 0.3019
+Loss Weights:
+  EQUATION Weight: 1.0017
+  IC Weight: 0.9983
+
+Test 16 loss: 10.0377
+
+Epoch 37/50
+Average Training Loss: 0.4451
+Individual Training Losses:
+  EQUATION Loss: 0.1446
+  IC Loss: 0.3034
+Loss Weights:
+  EQUATION Weight: 0.9938
+  IC Weight: 1.0062
+
+Test 16 loss: 10.3008
+
+Epoch 38/50
+Average Training Loss: 0.4450
+Individual Training Losses:
+  EQUATION Loss: 0.1457
+  IC Loss: 0.3009
+Loss Weights:
+  EQUATION Weight: 0.8725
+  IC Weight: 1.1275
+
+Test 16 loss: 10.0723
+
+Epoch 39/50
+Average Training Loss: 0.4319
+Individual Training Losses:
+  EQUATION Loss: 0.1311
+  IC Loss: 0.3105
+Loss Weights:
+  EQUATION Weight: 0.9477
+  IC Weight: 1.0523
+
+Test 16 loss: 10.1384
+
+Epoch 40/50
+Average Training Loss: 0.4280
+Individual Training Losses:
+  EQUATION Loss: 0.1315
+  IC Loss: 0.3101
+Loss Weights:
+  EQUATION Weight: 1.1485
+  IC Weight: 0.8515
+
+Test 16 loss: 10.3094
+
+Epoch 41/50
+Average Training Loss: 0.4313
+Individual Training Losses:
+  EQUATION Loss: 0.1278
+  IC Loss: 0.3113
+Loss Weights:
+  EQUATION Weight: 1.0086
+  IC Weight: 0.9914
+
+Test 16 loss: 10.1070
+
+Epoch 42/50
+Average Training Loss: 0.4234
+Individual Training Losses:
+  EQUATION Loss: 0.1269
+  IC Loss: 0.3061
+Loss Weights:
+  EQUATION Weight: 1.0261
+  IC Weight: 0.9739
+
+Test 16 loss: 10.1887
+
+Epoch 43/50
+Average Training Loss: 0.4148
+Individual Training Losses:
+  EQUATION Loss: 0.1174
+  IC Loss: 0.3110
+Loss Weights:
+  EQUATION Weight: 0.7006
+  IC Weight: 1.2994
+
+Test 16 loss: 10.1631
+
+Epoch 44/50
+Average Training Loss: 0.4111
+Individual Training Losses:
+  EQUATION Loss: 0.1214
+  IC Loss: 0.3030
+Loss Weights:
+  EQUATION Weight: 1.4631
+  IC Weight: 0.5369
+
+Test 16 loss: 10.2711
+
+Epoch 45/50
+Average Training Loss: 0.4068
+Individual Training Losses:
+  EQUATION Loss: 0.1120
+  IC Loss: 0.3141
+Loss Weights:
+  EQUATION Weight: 0.9101
+  IC Weight: 1.0899
+
+Test 16 loss: 10.1265
+
+Epoch 46/50
+Average Training Loss: 0.4171
+Individual Training Losses:
+  EQUATION Loss: 0.1343
+  IC Loss: 0.2856
+Loss Weights:
+  EQUATION Weight: 1.1618
+  IC Weight: 0.8382
+
+Test 16 loss: 10.2971
+
+Epoch 47/50
+Average Training Loss: 0.4163
+Individual Training Losses:
+  EQUATION Loss: 0.1303
+  IC Loss: 0.2860
+Loss Weights:
+  EQUATION Weight: 0.9863
+  IC Weight: 1.0137
+
+Test 16 loss: 10.0813
+
+Epoch 48/50
+Average Training Loss: 0.4082
+Individual Training Losses:
+  EQUATION Loss: 0.1251
+  IC Loss: 0.2921
+Loss Weights:
+  EQUATION Weight: 1.0003
+  IC Weight: 0.9997
+
+Test 16 loss: 10.2006
+
+Epoch 49/50
+Average Training Loss: 0.4070
+Individual Training Losses:
+  EQUATION Loss: 0.1320
+  IC Loss: 0.2746
+Loss Weights:
+  EQUATION Weight: 1.1976
+  IC Weight: 0.8024
+
+Test 16 loss: 10.2366
+
+Epoch 50/50
+Average Training Loss: 0.4035
+Individual Training Losses:
+  EQUATION Loss: 0.1260
+  IC Loss: 0.2824
+Loss Weights:
+  EQUATION Weight: 0.9743
+  IC Weight: 1.0257
+
+Test 16 loss: 10.1027
+Saved final model to pino_burgers_last_model.pt
+Saved train/test losses → pino_burgers_losses.json
+Saved loss curve → loss_curve.png
+===== Training Completed =====

@@ -235,6 +235,9 @@ class FNO(BaseModel, name="FNO"):
                 dim=self.n_dim,
                 grid_boundaries=spatial_grid_boundaries,
             )
+            
+        #elif positional embedding = ...
+        
         elif isinstance(positional_embedding, GridEmbedding2D):
             if self.n_dim == 2:
                 self.positional_embedding = positional_embedding
@@ -372,7 +375,9 @@ class FNO(BaseModel, name="FNO"):
         if self.positional_embedding is not None:
             x = self.positional_embedding(x)
 
+        
         x = self.lifting(x)
+        
 
         if self.domain_padding is not None:
             x = self.domain_padding.pad(x)

@@ -11,7 +11,7 @@ import warnings
 warnings.filterwarnings("once", category=UserWarning)
 
 
-class BurgersEqnLoss(object):
+'''class BurgersEqnLoss(object):
     """
     Computes loss for Burgers' equation.
     """
@@ -37,7 +37,7 @@ class BurgersEqnLoss(object):
         dx = self.domain_length[1] / nx
 
         # Get derivatives, du/dt and du/dx and d^2u/dxx
-        fd2d = FiniteDiff(dim=2, h=(dt, dx), periodic_in_x=False, periodic_in_y=False)
+        fd2d = FiniteDiff(dim=2, h=(dt, dx), periodic_in_x=False, periodic_in_y=True)
         dudt, dudx = fd2d.dx(u), fd2d.dy(u)
         dudxx = fd2d.dy(u, order=2)
 
@@ -46,6 +46,136 @@ class BurgersEqnLoss(object):
 
         # compute the loss of the left and right hand sides of Burgers' equation
         return self.loss(dudt, right_hand_side)
+
+    def __call__(self, y_pred, **kwargs):
+        if kwargs:
+            warnings.warn(
+                f"BurgersLoss.__call__() received unexpected keyword arguments: {list(kwargs.keys())}. "
+                "These arguments will be ignored.",
+                UserWarning,
+                stacklevel=2,
+            )
+        if self.method == "fdm":
+            return self.fdm(u=y_pred)
+        raise NotImplementedError()'''
+        
+
+class BurgersEqnLoss(object):
+    """
+    Computes loss for Burgers' equation.
+    """
+
+    def __init__(self, visc=0.01, method="fdm", loss=F.mse_loss, domain_length=1.0, eps=1e-6):
+        super().__init__()
+        self.visc = visc
+        self.method = method
+        self.loss = loss
+        self.eps = eps                      # <<< ADDED
+        self.domain_length = domain_length
+        if not isinstance(self.domain_length, (tuple, list)):
+            self.domain_length = [self.domain_length] * 2
+
+    def fdm(self, u):
+        # remove extra channel dimensions
+        u = u.squeeze(1)
+
+        # shapes
+        _, nt, nx = u.shape
+
+        # we assume that the input is given on a regular grid
+        dt = self.domain_length[0] / (nt - 1)
+        dx = self.domain_length[1] / nx
+
+        # Get derivatives, du/dt and du/dx and d^2u/dxx
+        fd2d = FiniteDiff(dim=2, h=(dt, dx), periodic_in_x=False, periodic_in_y=True)
+        dudt, dudx = fd2d.dx(u), fd2d.dy(u)
+        dudxx = fd2d.dy(u, order=2)
+
+        # right hand side
+        right_hand_side = -dudx * u + self.visc * dudxx
+
+        # ======================================================
+        # >>> ADDED: scale-aware normalization (CRITICAL FIX)
+        # ======================================================
+        # This rescales the PDE residual so that:
+        # - ν=0.001, 0.01 behave unchanged
+        # - ν=0.1 no longer collapses or explodes
+        scale = (
+            self.visc +
+            u.abs().mean(dim=(1, 2), keepdim=True)
+        ).detach()
+
+        residual = (dudt - right_hand_side) / (scale + self.eps)
+        # ======================================================
+
+        # compute the loss against zero residual
+        return self.loss(residual, torch.zeros_like(residual))
+
+    def __call__(self, y_pred, **kwargs):
+        if kwargs:
+            warnings.warn(
+                f"BurgersLoss.__call__() received unexpected keyword arguments: {list(kwargs.keys())}. "
+                "These arguments will be ignored.",
+                UserWarning,
+                stacklevel=2,
+            )
+        if self.method == "fdm":
+            return self.fdm(u=y_pred)
+        raise NotImplementedError()
+
+
+class HeatBurgersEqnLoss(object):
+    """
+    Computes loss for Burgers' equation.
+    """
+
+    def __init__(self, visc=0.01, method="fdm", loss=F.mse_loss, domain_length=1.0, eps=1e-6):
+        super().__init__()
+        self.visc = visc
+        self.method = method
+        self.loss = loss
+        self.eps = eps                      # <<< ADDED
+        self.domain_length = domain_length
+        if not isinstance(self.domain_length, (tuple, list)):
+            self.domain_length = [self.domain_length] * 2
+
+    def fdm(self, u):
+        # remove extra channel dimensions
+        u = u.squeeze(1)
+
+        # shapes
+        _, nt, nx = u.shape
+
+        # we assume that the input is given on a regular grid
+        dt = self.domain_length[0] / (nt - 1)
+        dx = self.domain_length[1] / nx
+
+        # Get derivatives, du/dt and du/dx and d^2u/dxx
+        fd2d = FiniteDiff(dim=2, h=(dt, dx), periodic_in_x=False, periodic_in_y=True)
+        dudt = fd2d.dx(u)
+        #dudx = fd2d.dy(u)
+        dudxx = fd2d.dy(u, order=2)
+
+        # right hand side
+        #right_hand_side = -dudx * u + self.visc * dudxx
+        right_hand_side = self.visc * dudxx
+        
+        # ======================================================
+        # >>> ADDED: scale-aware normalization (CRITICAL FIX)
+        # ======================================================
+        # This rescales the PDE residual so that:
+        # - ν=0.001, 0.01 behave unchanged
+        # - ν=0.1 no longer collapses or explodes
+        scale = (
+            self.visc +
+            u.abs().mean(dim=(1, 2), keepdim=True)
+        ).detach()
+
+        residual = (dudt - right_hand_side) / (scale + self.eps)
+        # ======================================================
+
+        # compute the loss against zero residual
+        return self.loss(residual, torch.zeros_like(residual))
 
     def __call__(self, y_pred, **kwargs):
         if kwargs:

@@ -1,0 +1,3 @@
+/home/jw3275/.conda/envs/fno/lib/python3.10/site-packages/torch/nn/modules/module.py:1786: UserWarning: FNO.forward() received unexpected keyword arguments: ['y']. These arguments will be ignored.
+  return forward_call(*args, **kwargs)
+slurmstepd: error: *** JOB 3542765 ON a1122u11n01 CANCELLED AT 2025-12-15T04:41:37 DUE TO TIME LIMIT ***

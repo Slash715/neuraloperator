@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/jw3275/neuraloperator/scripts/train_burgers_v_01_pino_res_100_modified_ite_10000.py", line 75, in <module>
+    train_loader, test_loaders, data_processor = load_mini_burgers_1dtime(
+  File "/home/jw3275/neuraloperator/neuralop/data/datasets/burgers.py", line 152, in load_mini_burgers_1dtime
+    burgers_dataset = Burgers1dTimeDataset(
+  File "/home/jw3275/neuraloperator/neuralop/data/datasets/burgers.py", line 102, in __init__
+    super().__init__(
+  File "/home/jw3275/neuraloperator/neuralop/data/datasets/pt_dataset.py", line 105, in __init__
+    data = torch.load(
+  File "/home/jw3275/.conda/envs/fno/lib/python3.10/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/jw3275/.conda/envs/fno/lib/python3.10/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/jw3275/.conda/envs/fno/lib/python3.10/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jw3275/neuraloperator/neuralop/data/datasets/data/burgers_train_100.pt'

@@ -1,0 +1,73 @@
+Using backend: pytorch
+Other supported backends: tensorflow.compat.v1, tensorflow, jax, paddle.
+paddle supports more examples now and is recommended.
+Traceback (most recent call last):
+  File "/home/jw3275/Characteristics-Net/train_codes/Exp-burgers-shift-soap/Exp-burgers-shift-4-200-p100-soap-periodic-features-batch-16.py", line 235, in <module>
+    losshistory, train_state = model.train(iterations=iterations, display_every=500, batch_size=batch_size)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/utils/internal.py", line 22, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/model.py", line 715, in train
+    self._train_sgd(iterations, display_every, verbose=verbose)
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/model.py", line 733, in _train_sgd
+    self._train_step(
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/model.py", line 620, in _train_step
+    self.train_step(inputs, targets, auxiliary_vars)
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/model.py", line 401, in train_step
+    self.opt.step(closure if not config.mixed else closure_mixed)
+  File "/home/jw3275/.conda/envs/dde/lib/python3.11/site-packages/torch/optim/lr_scheduler.py", line 140, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/.conda/envs/dde/lib/python3.11/site-packages/torch/optim/optimizer.py", line 493, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/train_codes/Exp-burgers-shift-soap/Exp-burgers-shift-4-200-p100-soap-periodic-features-batch-16.py", line 31, in step
+    loss = closure()   # compute loss + grads via DeepXDE
+           ^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/model.py", line 391, in closure
+    losses = outputs_losses_train(inputs, targets, auxiliary_vars)[1]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/model.py", line 354, in outputs_losses_train
+    return outputs_losses(
+           ^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/model.py", line 337, in outputs_losses
+    losses = losses_fn(targets, outputs_, loss_fn, inputs, self, aux=aux)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/data/pde_operator.py", line 315, in losses_train
+    return self._losses(outputs, loss_fn, inputs, model, num_func, aux=aux)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/data/pde_operator.py", line 253, in _losses
+    f = self.pde.pde(
+        ^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/train_codes/Exp-burgers-shift-soap/Exp-burgers-shift-4-200-p100-soap-periodic-features-batch-16.py", line 59, in burgers
+    dy_t =deepxde_shift.grad.jacobian(Y, x, i=0, j=1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/gradients/gradients.py", line 39, in jacobian
+    return gradients_reverse.jacobian(ys, xs, i=i, j=j)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/gradients/gradients_reverse.py", line 82, in jacobian
+    return jacobian._Jacobians(ys, xs, i=i, j=j)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/gradients/jacobian.py", line 132, in __call__
+    return self.Js[key](i, j)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/Characteristics-Net/deepxde/deepxde_shift/gradients/gradients_reverse.py", line 38, in __call__
+    self.J[i] = torch.autograd.grad(
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/.conda/envs/dde/lib/python3.11/site-packages/torch/autograd/__init__.py", line 445, in grad
+    return handle_torch_function(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/.conda/envs/dde/lib/python3.11/site-packages/torch/overrides.py", line 1720, in handle_torch_function
+    result = mode.__torch_function__(public_api, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/.conda/envs/dde/lib/python3.11/site-packages/torch/utils/_device.py", line 104, in __torch_function__
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/.conda/envs/dde/lib/python3.11/site-packages/torch/autograd/__init__.py", line 496, in grad
+    result = _engine_run_backward(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jw3275/.conda/envs/dde/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.67 GiB. GPU 0 has a total capacity of 139.81 GiB of which 3.94 MiB is free. Including non-PyTorch memory, this process has 139.80 GiB memory in use. Of the allocated memory 137.75 GiB is allocated by PyTorch, and 1.33 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
